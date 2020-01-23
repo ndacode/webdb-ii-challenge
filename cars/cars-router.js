@@ -34,16 +34,17 @@ router.get("/:id", (req, res) => {
       res.json(cars);
     })
     .catch(err => {
-      res.status(500).json({ message: "Failed to retrieve fruit" });
+      res.status(500).json({ message: "Failed to retrieve cars" });
     });
 });
 
 router.post("/", (req, res) => {
   const carData = req.body;
+  console.log(carData);
   db("cars")
     .insert(carData)
     .then(ids => {
-      db("fruits")
+      db("cars")
         .where({ id: ids[0] })
         .then(newCarEntry => {
           res.status(201).json(newCarEntry);
